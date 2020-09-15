@@ -5,7 +5,7 @@ Page({
   data: {
     formats: {},
     readOnly: false,
-    placeholder: '社团的推广内容，推广文的第一段将会作为预览片段，第一张图片将会作为预览图',
+    placeholder: '社团的推广内容，推广文的第一段将会作为预览片段，第一张图片将会作为预览图，在第一行仅写一个数字1会在首页中隐藏该文章',
     editorHeight: 300,
     keyboardHeight: 0,
     isIOS: false
@@ -56,6 +56,21 @@ Page({
     wx.createSelectorQuery().select('#editor').context(function (res) {
       that.editorCtx = res.context
     }).exec()
+    db.collection('article').where({
+      _openid: app.globalData.openid
+    }).get().then(res=>{
+      if(res.data.length){
+        console.log(res.data[0].html)
+        that.editorCtx.setContents({
+          html:res.data[0].html,
+          success: res =>{
+            wx.showToast({
+              title: '文档读取成功',
+            })
+          }
+        })
+      }
+    })
   },
   blur() {
     this.editorCtx.blur()
@@ -112,7 +127,7 @@ Page({
                 id: 'abcd',
                 role: 'god'
               },
-              width: '80%',
+              width: '100%',
               success: function () {
                 console.log('insert image success')
               }

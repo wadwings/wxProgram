@@ -12,6 +12,7 @@ Page({
     userInfo: null,
     nickName: "点击登录",
     editor: 0,
+    info: 1,
   },
   onGetOpenid: function () {
     let that = this
@@ -20,27 +21,34 @@ Page({
       name: 'login',
       data: {},
       success: res => {
-        let pres = res;
+        console.log('[云函数] [login] user openid: ', res.result.openid)
+        app.globalData.openid = res.result.openid
         db.collection('user').where({
-          _id: pres.result.openid,
+          _id: app.globalData.openid,
         }).get().then(res => {
           if (!(res.data.length)) {
-            console.log('添加成功')
-            db.collection('user').add({
-              data: {
-                _id: pres.result.openid
+            wx.getUserInfo({
+              success: res => {
+                console.log('添加成功')
+                let time = new Date()
+                db.collection('user').add({
+                  data: {
+                    _id: app.globalData.openid,
+                    nickName: res.userInfo.nickName,
+                    avatarUrl: res.userInfo.avatarUrl,
+                    time: time.valueOf()
+                  }
+                })
               }
             })
+
           }
         })
         db.collection('user').where({
-          enable:1
-        }).get().then(res=>{
-          for(let i = 0; i < res.data.length; i++){
-            console.log(res.data[i]._id)
-            console.log(pres.result.openid)
-            console.log(pres.result.openid == res.data[i]._id)
-            if(pres.result.openid == res.data[i]._id){
+          enable: 1
+        }).get().then(res => {
+          for (let i = 0; i < res.data.length; i++) {
+            if (app.globalData.openid == res.data[i]._id) {
               that.setData({
                 editor: 1
               })
@@ -48,8 +56,7 @@ Page({
             }
           }
         })
-        console.log('[云函数] [login] user openid: ', res.result.openid)
-        app.globalData.openid = res.result.openid
+
       },
       fail: err => {
         console.error('[云函数] [login] 调用失败', err)
@@ -65,7 +72,12 @@ Page({
     let image = /(?<=(<img.+src="))[^"]+(?=")/m
     console.log(this.data.data)
     db.collection('article').get().then(res => {
+      that.setData({
+        info: 0,
+      })
       for (let i = 0; i < res.data.length; i++) {
+        if ((title.exec(res.data[i].html) ? title.exec(res.data[i].html)[0] : null) === "1")
+        continue;
         console.log(res.data[i]);
         let tmp = that.data.data
         tmp.push({
@@ -134,15 +146,17 @@ Page({
       html: ""
     })
   },
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
     let that = this
     let title = /(?<=(<p>))[^<>]+(?=(<))/m
     let image = /(?<=(<img.+src="))[^"]+(?=")/m
     console.log(this.data.data)
     db.collection('article').get().then(res => {
-      for (let i = 0; i < res.data.length; i++) {
+        let tmp = [];
+        for (let i = 0; i < res.data.length; i++) {
+        if ((title.exec(res.data[i].html) ? title.exec(res.data[i].html)[0] : null) === "1")
+          continue;
         console.log(res.data[i]);
-        let tmp = that.data.data
         tmp.push({
           html: res.data[i].html,
           icons: image.exec(res.data[i].html) ? image.exec(res.data[i].html)[0] : null,

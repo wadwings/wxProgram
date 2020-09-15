@@ -1,13 +1,22 @@
 <!--index.wxml-->
 
 <view class="background" style="opacity:{{vOpacity}}">
-  <view id="userinfo">
+  <view id="userinfo" wx:if="{{info}}">
     <view style="display:flex; align-items:center;">
       <button open-type="getUserInfo" bindgetuserinfo="onGetUserInfo" class="userinfo-avatar"
         style="background-image: url({{avatarUrl}})"></button>
       <text class="login-text" bindtap="onGetOpenid">{{nickName}}</text>
     </view>
   </view>
+  <view class="lunbo">
+      <swiper class="swiper" indicator-dots="true" autoplay="true" interval='5000' duration='1000' circular="true">
+        <block wx:for="{{data}}">
+          <swiper-item id="{{index}}" bindtap="details">
+            <image class="s_img" src="{{item.icons}}" mode="aspectFill" ></image>
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
   <view class="container">
     <view class="wxfor" wx:for="{{data}}">
       <view class="block" id="{{index}}" bindtap="details">
@@ -26,6 +35,6 @@
       <navigator url="../editor/editor" open-type="navigate" class="navi"><text>编辑器</text></navigator>
     </view>
   </view>
-<view id="rich-text" style="opacity:{{opacity}}; z-index:{{index}}" bindtap="tap">
+<view id="rich-text" style="z-index:{{index}}" bindtap="tap" wx:if="{{editor}}" >
   <rich-text nodes="{{html}}"></rich-text>
 </view>
