@@ -2,58 +2,30 @@
 
 <view class="background" style="opacity:{{vOpacity}}">
   <view id="userinfo">
-  <view style="display:flex; align-items:center;">
-    <button open-type="getUserInfo" bindgetuserinfo="onGetUserInfo" class="userinfo-avatar"
-      style="background-image: url({{avatarUrl}})"></button>
-    <text class="login-text" bindtap="onGetOpenid">{{nickName}}</text>
+    <view style="display:flex; align-items:center;">
+      <button open-type="getUserInfo" bindgetuserinfo="onGetUserInfo" class="userinfo-avatar"
+        style="background-image: url({{avatarUrl}})"></button>
+      <text class="login-text" bindtap="onGetOpenid">{{nickName}}</text>
+    </view>
   </view>
-</view>
   <view class="container">
     <view class="wxfor" wx:for="{{data}}">
       <view class="block" id="{{index}}" bindtap="details">
         <view class="content smallPart">
-          <p>{{item.content}}</p>
+          <text>{{item.content}}</text>
         </view>
         <view class="icon smallPart">
           <image src="{{item.icons}}" mode="aspectFill"></image>
         </view>
       </view>
     </view>
-    <!-- <view class="content smallPart" id="拳击社content">
-      <p>{{content1}}
-      </p>
-    </view>
-    <view class="icon smallPart" id="拳击社icon" bindtap="details">
-      <image src="{{icons1}}" mode="aspectFill"></image>
-    </view>
-    <view class="content smallPart" id="拳击社content">
-      <p>{{content1}}
-      </p>
-    </view>
-    <view class="icon smallPart" id="拳击社icon">
-      <image src="{{icons1}}" mode="aspectFill"></image>
-    </view>
-    <view class="content smallPart" id="拳击社content">
-      <p>{{content1}}
-      </p>
-    </view>
-    <view class="icon smallPart" id="拳击社icon">
-      <image src="{{icons1}}" mode="aspectFill"></image>
-    </view>
-    <view class="content smallPart" id="拳击社content">
-      <p>{{content1}}
-      </p>
-    </view>
-    <view class="icon smallPart" id="拳击社icon">
-      <image src="{{icons1}}" mode="aspectFill"></image>
-    </view> -->
-  </view>
-  <view id="nav-bar">
-  <view >
-    <navigator url="../editor/editor" open-type="navigate" class="navi"><text>编辑器</text></navigator>
   </view>
 </view>
-</view>
+<view id="nav-bar">
+    <view style="opacity: {{editor}}">
+      <navigator url="../editor/editor" open-type="navigate" class="navi"><text>编辑器</text></navigator>
+    </view>
+  </view>
 <view id="rich-text" style="opacity:{{opacity}}; z-index:{{index}}" bindtap="tap">
   <rich-text nodes="{{html}}"></rich-text>
 </view>

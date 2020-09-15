@@ -1,102 +1,3 @@
-// //index.js
-// const app = getApp()
-
-// Page({
-//   data: {
-//     avatarUrl: './user-unlogin.png',
-//     userInfo: {},
-//     logged: false,
-//     takeSession: false,
-//     requestResult: ''
-//   },
-
-//   onLoad: function() {
-//     if (!wx.cloud) {
-//       wx.redirectTo({
-//         url: '../chooseLib/chooseLib',
-//       })
-//       return
-//     }
-
-//     // 获取用户信息
-
-
-
-
-//   onGetOpenid: function() {
-//     // 调用云函数
-//     wx.cloud.callFunction({
-//       name: 'login',
-//       data: {},
-//       success: res => {
-//         console.log('[云函数] [login] user openid: ', res.result.openid)
-//         app.globalData.openid = res.result.openid
-//         wx.navigateTo({
-//           url: '../userConsole/userConsole',
-//         })
-//       },
-//       fail: err => {
-//         console.error('[云函数] [login] 调用失败', err)
-//         wx.navigateTo({
-//           url: '../deployFunctions/deployFunctions',
-//         })
-//       }
-//     })
-//   },
-
-//   // 上传图片
-//   doUpload: function () {
-//     // 选择图片
-//     wx.chooseImage({
-//       count: 1,
-//       sizeType: ['compressed'],
-//       sourceType: ['album', 'camera'],
-//       success: function (res) {
-
-//         wx.showLoading({
-//           title: '上传中',
-//         })
-
-//         const filePath = res.tempFilePaths[0]
-
-//         // 上传图片
-//         const cloudPath = 'my-image' + filePath.match(/\.[^.]+?$/)[0]
-//         wx.cloud.uploadFile({
-//           cloudPath,
-//           filePath,
-//           success: res => {
-//             console.log('[上传文件] 成功：', res)
-
-//             app.globalData.fileID = res.fileID
-//             app.globalData.cloudPath = cloudPath
-//             app.globalData.imagePath = filePath
-
-//             wx.navigateTo({
-//               url: '../storageConsole/storageConsole'
-//             })
-//           },
-//           fail: e => {
-//             console.error('[上传文件] 失败：', e)
-//             wx.showToast({
-//               icon: 'none',
-//               title: '上传失败',
-//             })
-//           },
-//           complete: () => {
-//             wx.hideLoading()
-//           }
-//         })
-
-//       },
-//       fail: e => {
-//         console.error(e)
-//       }
-//     })
-//   },
-
-// })
-//index.js
-//获取应用实例
 const app = getApp()
 const db = wx.cloud.database()
 Page({
@@ -109,9 +10,11 @@ Page({
     avatarUrl: new String(),
     logged: false,
     userInfo: null,
-    nickName: "点击登录"
+    nickName: "点击登录",
+    editor: 0,
   },
   onGetOpenid: function () {
+    let that = this
     // 调用云函数
     wx.cloud.callFunction({
       name: 'login',
@@ -130,7 +33,21 @@ Page({
             })
           }
         })
-        db.
+        db.collection('user').where({
+          enable:1
+        }).get().then(res=>{
+          for(let i = 0; i < res.data.length; i++){
+            console.log(res.data[i]._id)
+            console.log(pres.result.openid)
+            console.log(pres.result.openid == res.data[i]._id)
+            if(pres.result.openid == res.data[i]._id){
+              that.setData({
+                editor: 1
+              })
+              break;
+            }
+          }
+        })
         console.log('[云函数] [login] user openid: ', res.result.openid)
         app.globalData.openid = res.result.openid
       },
@@ -217,5 +134,25 @@ Page({
       html: ""
     })
   },
-
+  onPullDownRefresh: function() {
+    let that = this
+    let title = /(?<=(<p>))[^<>]+(?=(<))/m
+    let image = /(?<=(<img.+src="))[^"]+(?=")/m
+    console.log(this.data.data)
+    db.collection('article').get().then(res => {
+      for (let i = 0; i < res.data.length; i++) {
+        console.log(res.data[i]);
+        let tmp = that.data.data
+        tmp.push({
+          html: res.data[i].html,
+          icons: image.exec(res.data[i].html) ? image.exec(res.data[i].html)[0] : null,
+          content: title.exec(res.data[i].html) ? title.exec(res.data[i].html)[0] : null,
+        })
+        console.log(tmp)
+        that.setData({
+          data: tmp,
+        })
+      }
+    })
+  }
 })
