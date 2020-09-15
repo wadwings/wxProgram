@@ -100,58 +100,67 @@ Page({
     wx.chooseImage({
       count: 1,
       success: function (res) {
-        that.editorCtx.insertImage({
-          src: res.tempFilePaths[0],
-          data: {
-            id: 'abcd',
-            role: 'god'
+        let time = new Date()
+        let pattern = /(?<=\.).+/
+        wx.cloud.uploadFile({
+          cloudPath: time.valueOf().toString() + '.' +pattern.exec(res.tempFilePaths[0])[0],
+          filePath: res.tempFilePaths[0],
+          success: res => {
+            that.editorCtx.insertImage({
+              src: res.fileID,
+              data: {
+                id: 'abcd',
+                role: 'god'
+              },
+              width: '80%',
+              success: function () {
+                console.log('insert image success')
+              }
+            })
           },
-          width: '80%',
-          success: function () {
-            console.log('insert image success')
-          }
-        })
+          fail: console.error
+        });
       }
     })
   },
   getContents(){
     this.editorCtx.getContents({
       success: res=>{
+        let pres = res;
         let openid = app.globalData.openid
         let collection = db.collection('article').where({
           _openid:app.globalData.openid
         });
-        let flag = false;
         console.log(openid)
-        collection.get().then(res =>{
-          if(!res.data.length)
-            flag = true;
-        })
-        if (flag){
-        db.collection('article').add({
-          data:{
-            _id: app.globalData.openid,
-            html: res.html
+        db.collection('article').where({
+          _openid:app.globalData.openid
+        }).get().then(res =>{
+          if(res.data.length){
+            collection.update({
+              data:{
+                html: pres.html
+              }
+            }).then(res =>{
+              console.log(res)
+              wx.showToast({
+                title: '文档修改成功',
+              })
+            })
+          }else{
+            db.collection('article').add({
+              data:{
+                _id: app.globalData.openid,
+                html: pres.html
+              }
+            })
+            .then(res =>{
+              console.log(res)
+              wx.showToast({
+                title: '文档保存成功',
+              })
+            })
           }
         })
-        .then(res =>{
-          console.log(res)
-          wx.showToast({
-            title: '文档保存成功',
-          })
-        })}
-        else{
-          collection.update({
-            data:{
-              html: res.html
-            }
-          }).then(res =>{
-            console.log(res)
-            wx.showToast({
-              title: '文档修改成功',
-            })
-          })
-        }
       }
     })
   }
