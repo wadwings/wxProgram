@@ -9,7 +9,7 @@
     </view>
   </view>
   <view class="lunbo">
-      <swiper class="swiper" indicator-dots="true" autoplay="true" interval='5000' duration='1000' circular="true">
+      <swiper class="swiper" indicator-dots="true" autoplay="true" interval='5000' duration='1000' circular="true" current="0">
         <block wx:for="{{data}}">
           <swiper-item id="{{index}}" bindtap="details">
             <image class="s_img" src="{{item.icons}}" mode="aspectFill" ></image>
@@ -31,10 +31,10 @@
   </view>
 </view>
 <view id="nav-bar">
-    <view style="opacity: {{editor}}">
+    <view  wx:if="{{editor}}">
       <navigator url="../editor/editor" open-type="navigate" class="navi"><text>编辑器</text></navigator>
     </view>
   </view>
-<view id="rich-text" style="z-index:{{index}}" bindtap="tap" wx:if="{{editor}}" >
+<view id="rich-text" style="z-index:{{index}};opacity: {{opacity}}" bindtap="tap">
   <rich-text nodes="{{html}}"></rich-text>
 </view>

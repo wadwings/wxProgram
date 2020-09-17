@@ -13,6 +13,7 @@ Page({
     nickName: "点击登录",
     editor: 0,
     info: 1,
+    form: 0,
   },
   onGetOpenid: function () {
     let that = this
@@ -41,7 +42,6 @@ Page({
                 })
               }
             })
-
           }
         })
         db.collection('user').where({
@@ -56,7 +56,9 @@ Page({
             }
           }
         })
-
+        that.setData({
+          info: 0,
+        })
       },
       fail: err => {
         console.error('[云函数] [login] 调用失败', err)
@@ -72,9 +74,6 @@ Page({
     let image = /(?<=(<img.+src="))[^"]+(?=")/m
     console.log(this.data.data)
     db.collection('article').get().then(res => {
-      that.setData({
-        info: 0,
-      })
       for (let i = 0; i < res.data.length; i++) {
         if ((title.exec(res.data[i].html) ? title.exec(res.data[i].html)[0] : null) === "1")
         continue;
@@ -135,6 +134,7 @@ Page({
       opacity: 1,
       index: 2,
       vOpacity: 0,
+      editor: 0,
       html: tmp
     });
   },
@@ -143,6 +143,7 @@ Page({
       opacity: 0,
       index: -1,
       vOpacity: 1,
+      editor: 1,
       html: ""
     })
   },
