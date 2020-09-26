@@ -1,4 +1,9 @@
 {
-  "usingComponents": {},
-  "enablePullDownRefresh": true
+  "usingComponents": {
+    "l-form" : "./../../miniprogram_npm/lin-ui/form/index",
+    "l-form-items" : "./../../miniprogram_npm/lin-ui/form-item/index",
+    "l-input" : "./../../miniprogram_npm/lin-ui/input/index",
+    "l-button": "./../../miniprogram_npm/lin-ui/button/index",
+    "l-card": "./../../miniprogram_npm/lin-ui/card/index"
+  }
 }

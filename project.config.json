@@ -10,7 +10,7 @@
     "minified": true,
     "newFeature": true,
     "coverView": true,
-    "nodeModules": false,
+    "nodeModules": true,
     "autoAudits": false,
     "showShadowRootInWxmlPanel": true,
     "scopeDataCheck": false,
@@ -33,8 +33,8 @@
     "packNpmRelationList": []
   },
   "appid": "wx4d354f11425bab9c",
-  "projectname": "miniprogram-5",
-  "libVersion": "2.8.1",
+  "projectname": "123",
+  "libVersion": "2.12.2",
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
   "condition": {

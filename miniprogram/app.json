@@ -1,12 +1,19 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/editor/editor"
+    "pages/editor/editor",
+    "pages/genre/index",
+    "pages/innovation/index",
+    "pages/art/index",
+    "pages/PE/index",
+    "pages/technic/index",
+    "pages/willing/index",
+    "pages/innovation/random_component/index"
   ],
   "window": {
-    "backgroundColor": "#F6F6F6",
+    "backgroundColor": "#f6f6f6",
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#F6F6F6",
+    "navigationBarBackgroundColor": "#f6f6f6",
     "navigationBarTitleText": "百团大战",
     "navigationBarTextStyle": "black"
   },

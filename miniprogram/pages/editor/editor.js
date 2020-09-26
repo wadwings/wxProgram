@@ -139,20 +139,24 @@ Page({
     })
   },
   getContents(){
-    this.editorCtx.getContents({
+    this.editorCtx.getContents({      
       success: res=>{
+        let title = /(?<=(<p>))[^<>]+(?=(<))/m;
+        let image = /(?<=(<img.+src="))[^"]+(?=")/m;
         let pres = res;
         let openid = app.globalData.openid
         let collection = db.collection('article').where({
           _openid:app.globalData.openid
         });
         console.log(openid)
-        db.collection('article').where({
-          _openid:app.globalData.openid
-        }).get().then(res =>{
+        collection.get().then(res =>{
           if(res.data.length){
+            console.log(title)
+            console.log(pres.html)
             collection.update({
               data:{
+                enable: title.exec(pres.html)[0] == "1" ? 0 : 1,
+                src: image.exec(pres.html)[0],
                 html: pres.html
               }
             }).then(res =>{
@@ -164,8 +168,12 @@ Page({
           }else{
             db.collection('article').add({
               data:{
+                enable: title.exec(pres.html)[0] == "1" ? 0 : 1,
+                src: image.exec(pres.html)[0],
                 _id: app.globalData.openid,
-                html: pres.html
+                html: pres.html,
+                genre: app.globalData.userInfo.genre,
+                shetuan: app.globalData.userInfo.shetuan,
               }
             })
             .then(res =>{

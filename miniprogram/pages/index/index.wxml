@@ -8,33 +8,21 @@
       <text class="login-text" bindtap="onGetOpenid">{{nickName}}</text>
     </view>
   </view>
-  <view class="lunbo">
-      <swiper class="swiper" indicator-dots="true" autoplay="true" interval='5000' duration='1000' circular="true" current="0">
-        <block wx:for="{{data}}">
-          <swiper-item id="{{index}}" bindtap="details">
-            <image class="s_img" src="{{item.icons}}" mode="aspectFill" ></image>
-          </swiper-item>
-        </block>
-      </swiper>
-    </view>
-  <view class="container">
-    <view class="wxfor" wx:for="{{data}}">
-      <view class="block" id="{{index}}" bindtap="details">
-        <view class="content smallPart">
-          <text>{{item.content}}</text>
-        </view>
-        <view class="icon smallPart">
-          <image src="{{item.icons}}" mode="aspectFill"></image>
-        </view>
-      </view>
-    </view>
-  </view>
 </view>
-<view id="nav-bar">
-    <view  wx:if="{{editor}}">
-      <navigator url="../editor/editor" open-type="navigate" class="navi"><text>编辑器</text></navigator>
-    </view>
+<l-form wx:if="{{form}}" name="signup" l-form-btn-class="l-form-btn-class" bind:linsubmit="submit">
+  <l-form-items label="姓名:" name="name">
+    <l-input l-class="l-input-container-class" id="name" value="{{signup.name}}"></l-input>
+  </l-form-items>
+  <l-form-items label="专业班级:" name="classes">
+    <l-input l-class="l-input-container-class" id="classes" value="{{signup.classes}}"></l-input>
+  </l-form-items>
+  <l-form-items label="学号:" name="uninumber">
+    <l-input l-class="l-input-container-class" id="uninumber" value="{{signup.uninumber}}"></l-input>
+  </l-form-items>
+  <view slot="submit">
+    <l-button>提交</l-button>
   </view>
-<view id="rich-text" style="z-index:{{index}};opacity: {{opacity}}" bindtap="tap">
-  <rich-text nodes="{{html}}"></rich-text>
-</view>
+  <view slot="reset">
+    <l-button type="default" plain>重置</l-button>
+  </view>
+</l-form>

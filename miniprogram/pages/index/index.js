@@ -14,6 +14,11 @@ Page({
     editor: 0,
     info: 1,
     form: 0,
+    signup: {
+      name: "",
+      classes: "",
+      uninumber: ""
+    }
   },
   onGetOpenid: function () {
     let that = this
@@ -43,18 +48,21 @@ Page({
               }
             })
           }
-        })
-        db.collection('user').where({
-          enable: 1
-        }).get().then(res => {
-          for (let i = 0; i < res.data.length; i++) {
-            if (app.globalData.openid == res.data[i]._id) {
+          db.collection('user').where({
+            _id: app.globalData.openid,
+          }).get().then(res=>{
+            if(!(res.data[0].name)){
               that.setData({
-                editor: 1
+                form: 1,
               })
-              break;
+            }else{
+              app.globalData.userInfo = res.data[0]
+              console.log(app.globalData.userInfo)
+              wx.redirectTo({
+                url: '../genre/index',
+              })
             }
-          }
+          })
         })
         that.setData({
           info: 0,
@@ -69,32 +77,11 @@ Page({
     })
   },
   onLoad: function () {
-    let that = this
-    let title = /(?<=(<p>))[^<>]+(?=(<))/m
-    let image = /(?<=(<img.+src="))[^"]+(?=")/m
-    console.log(this.data.data)
-    db.collection('article').get().then(res => {
-      for (let i = 0; i < res.data.length; i++) {
-        if ((title.exec(res.data[i].html) ? title.exec(res.data[i].html)[0] : null) === "1")
-        continue;
-        console.log(res.data[i]);
-        let tmp = that.data.data
-        tmp.push({
-          html: res.data[i].html,
-          icons: image.exec(res.data[i].html) ? image.exec(res.data[i].html)[0] : null,
-          content: title.exec(res.data[i].html) ? title.exec(res.data[i].html)[0] : null,
-        })
-        console.log(tmp)
-        that.setData({
-          data: tmp,
-        })
-      }
-    })
-    // console.log(1)
-    // this.setData({
-    //   icons1: image.exec(this.data.testhtml[0])[0],
-    //   content1: title.exec(this.data.testhtml[0])[0]
-    // })
+    setTimeout(() => {
+      if(this.data.form)
+        wx.lin.initValidateForm(this);
+    },3000)
+    let that = this;
     wx.getSetting({
       success: res => {
         if (res.authSetting['scope.userInfo']) {
@@ -125,49 +112,22 @@ Page({
       })
     }
   },
-  details: function (Event) {
-    let that = this
-    console.log(Event)
-    console.log(this.data.data[parseInt(Event.currentTarget.id)].html)
-    let tmp = this.data.data[parseInt(Event.currentTarget.id)].html
-    this.setData({
-      opacity: 1,
-      index: 2,
-      vOpacity: 0,
-      editor: 0,
-      html: tmp
-    });
-  },
-  tap: function () {
-    this.setData({
-      opacity: 0,
-      index: -1,
-      vOpacity: 1,
-      editor: 1,
-      html: ""
-    })
-  },
-  onPullDownRefresh: function () {
-    let that = this
-    let title = /(?<=(<p>))[^<>]+(?=(<))/m
-    let image = /(?<=(<img.+src="))[^"]+(?=")/m
-    console.log(this.data.data)
-    db.collection('article').get().then(res => {
-        let tmp = [];
-        for (let i = 0; i < res.data.length; i++) {
-        if ((title.exec(res.data[i].html) ? title.exec(res.data[i].html)[0] : null) === "1")
-          continue;
-        console.log(res.data[i]);
-        tmp.push({
-          html: res.data[i].html,
-          icons: image.exec(res.data[i].html) ? image.exec(res.data[i].html)[0] : null,
-          content: title.exec(res.data[i].html) ? title.exec(res.data[i].html)[0] : null,
-        })
-        console.log(tmp)
-        that.setData({
-          data: tmp,
-        })
+  submit(e){//收集用户姓名、学号、专业班级
+    const {detail} = e;
+    db.collection('user').where({
+      _id : app.globalData.openid
+    }).update({
+      data:{
+        name: detail.values.name,
+        class: detail.values.classes,
+        uninumber: detail.values.uninumber,
       }
+    }).get().then(res =>{
+      app.globalData.userInfo = res.data[0];
+      console.log(app.globalData.userInfo);
+    }).catch(e => {
+      console.error(e);
     })
-  }
+  },
+  
 })
