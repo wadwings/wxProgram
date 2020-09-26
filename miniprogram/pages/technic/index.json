@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "l-water-flow":"../../miniprogram_npm/lin-ui/water-flow/index",
+    "product":"./random_component/index"
+  }
 }

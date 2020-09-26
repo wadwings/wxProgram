@@ -10,7 +10,7 @@ Page({
     avatarUrl: new String(),
     logged: false,
     userInfo: null,
-    nickName: "点击登录",
+    nickName: "点击左侧头像区域登录",
     editor: 0,
     info: 1,
     form: 0,
@@ -51,7 +51,7 @@ Page({
           db.collection('user').where({
             _id: app.globalData.openid,
           }).get().then(res=>{
-            if(!(res.data[0].name)){
+            if(!res.data.length || !(res.data[0].name)){
               that.setData({
                 form: 1,
               })
@@ -108,25 +108,30 @@ Page({
         logged: true,
         avatarUrl: e.detail.userInfo.avatarUrl,
         userInfo: e.detail.userInfo,
-        nickName: res.userInfo.nickName
+        nickName: e.detail.userInfo.nickName
       })
     }
   },
   submit(e){//收集用户姓名、学号、专业班级
     const {detail} = e;
-    db.collection('user').where({
+    const user = db.collection('user').where({
       _id : app.globalData.openid
-    }).update({
+    });
+    user.update({
       data:{
         name: detail.values.name,
         class: detail.values.classes,
         uninumber: detail.values.uninumber,
       }
-    }).get().then(res =>{
-      app.globalData.userInfo = res.data[0];
-      console.log(app.globalData.userInfo);
     }).catch(e => {
       console.error(e);
+    })
+    user.get().then(res =>{
+      app.globalData.userInfo = res.data[0];
+      console.log(app.globalData.userInfo);
+    })
+    wx.redirectTo({
+      url: '../genre/index',
     })
   },
   

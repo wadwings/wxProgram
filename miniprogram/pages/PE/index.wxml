@@ -1,2 +1,3 @@
-<!--miniprogram/pages/PE/index.wxml-->
-<text>miniprogram/pages/PE/index.wxml</text>
+<content-title name="WaterFlow" describe="瀑布流">
+    <l-water-flow generic:l-water-flow-item="product" />
+</content-title>

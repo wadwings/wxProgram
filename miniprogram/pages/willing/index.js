@@ -1,4 +1,6 @@
-// miniprogram/pages/willing/index.js
+// miniprogram/pages/innovation/index.js
+import {product} from './data.js'
+console.log(product)
 Page({
 
   /**
@@ -7,12 +9,11 @@ Page({
   data: {
 
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    wx.lin.renderWaterFlow(product);
   },
 
   /**

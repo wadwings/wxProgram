@@ -1,6 +1,6 @@
-// miniprogram/pages/innovation/index.js
-import {product} from './data.js'
-console.log(product)
+// miniprogram/pages/innovation/random_component/index.js
+import {product} from '../data.js'
+
 Page({
 
   /**
@@ -9,11 +9,19 @@ Page({
   data: {
 
   },
+  details: function(){
+    this.triggerEvent(detail, {}, {})
+  },
+  onClose: function(){
+    this.setData({
+      html: null
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.lin.renderWaterFlow(product);
+
   },
 
   /**
@@ -63,5 +71,28 @@ Page({
    */
   onShareAppMessage: function () {
 
+  }
+})
+
+Component({
+  properties:{
+    data:Object
+  },
+  data:{
+    html: null
+  },
+  methods:{
+    details: function(e){
+      this.setData({
+        html: product[e.target.id].html
+      });
+      console.log(product[e.target.id].html)
+      console.log(e)
+    },
+    onClose: function(){
+      this.setData({
+        html: null
+      })
+    }
   }
 })
