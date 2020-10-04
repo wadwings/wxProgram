@@ -1,6 +1,6 @@
 /* miniprogram/pages/genre/index.wxss */
 .navi{
-  margin: 20px 40px;
+  margin: 15px 30px;
   text-align: center;
   display: block;
   transition : 0.5s;
@@ -20,304 +20,6 @@ l-card view{
   font-weight: 1000;
   display: inline;
 }
-#v1:hover{
-  box-shadow: 0 0 5px #00e640,
-              0 0 25px #00e640,
-              0 0 50px #00e640,
-              0 0 200px #00e640;
-  background: #00e640;
-  color: #f2f1ef;
-}
-#v1{
-  overflow: hidden;
-  color: #00e640;
-}
-#v1 view{
-  color: inherit;
-}
-#v1 span{
-  position: absolute;
-  display: block;
-}
-#v1 span:nth-child(1){
-  top: -12px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #00e640);
-  animation: animate1 1s linear infinite;
-}
-#v1 span:nth-child(2){
-  top: -100%;
-  right: -12px;
-  width: 2px;
-  height: 100%;
-  background: linear-gradient(180deg, transparent, #00e640);
-  animation: animate2 1s linear infinite;
-  animation-delay: 0.25s;
-}
-#v1 span:nth-child(3){
-  bottom: -12px;
-  right: -12px;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(270deg, transparent, #00e640);
-  animation: animate3 1s linear infinite;
-  animation-delay: 0.5s;
-}
-#v1 span:nth-child(4){
-  top: 100%;
-  left: -12px;
-  width: 2px;
-  height: 100%;
-  background: linear-gradient(0deg, transparent, #00e640);
-  animation: animate4 1s linear infinite;
-  animation-delay: 0.75s;
-}
-@keyframes animate1{
-  0%{
-    left: -100%;
-  }50%,100%{
-    left: 100%;
-  }
-}
-@keyframes animate2{
-  0%{
-    top: -200%;
-  }50%, 100%{
-    top: 200%;
-  }
-}
-@keyframes animate3{
-  0%{
-    left: 100%;
-  }50%,100%{
-    left: -100%;
-  }
-}
-@keyframes animate4{
-  0%{
-    top: 200%;
-  }50%,100%{
-    top: -200%;
-  }
-}
-#v2:hover{
-  box-shadow: 0 0 5px #19b5fe,
-              0 0 25px #19b5fe,
-              0 0 50px #19b5fe,
-              0 0 200px #19b5fe;
-  background: #19b5fe;
-  color: #f2f1ef;
-}
-#v2{
-  color: #19b5fe;
-  overflow: hidden;
-}
-#v2 view{
-  color: inherit;
-}
-#v2 span{
-  position: absolute;
-  display: block;
-}
-#v2 span:nth-child(1){
-  top: -12px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #19b5fe);
-  animation: animate1 1s linear infinite;
-}
-#v2 span:nth-child(2){
-  top: -100%;
-  right: -12px;
-  width: 2px;
-  height: 100%;
-  background: linear-gradient(180deg, transparent, #19b5fe);
-  animation: animate2 1s linear infinite;
-  animation-delay: 0.25s;
-}
-#v2 span:nth-child(3){
-  bottom: -12px;
-  right: -12px;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(270deg, transparent, #19b5fe);
-  animation: animate3 1s linear infinite;
-  animation-delay: 0.5s;
-}
-#v2 span:nth-child(4){
-  top: 100%;
-  left: -12px;
-  width: 2px;
-  height: 100%;
-  background: linear-gradient(0deg, transparent, #19b5fe);
-  animation: animate4 1s linear infinite;
-  animation-delay: 0.75s;
-}
-#v3:hover{
-  box-shadow: 0 0 5px #a537fd,
-              0 0 25px #a537fd,
-              0 0 50px #a537fd,
-              0 0 200px #a537fd;
-  background: #a537fd;
-  color: #f2f1ef;
-}
-#v3{
-  color: #a537fd;
-  overflow: hidden;
-}
-#v3 view{
-  color: inherit;
-}
-#v3 span{
-  position: absolute;
-  display: block;
-}
-#v3 span:nth-child(1){
-  top: -12px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #a537fd);
-  animation: animate1 1s linear infinite;
-}
-#v3 span:nth-child(2){
-  top: -100%;
-  right: -12px;
-  width: 2px;
-  height: 100%;
-  background: linear-gradient(180deg, transparent, #a537fd);
-  animation: animate2 1s linear infinite;
-  animation-delay: 0.25s;
-}
-#v3 span:nth-child(3){
-  bottom: -12px;
-  right: -12px;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(270deg, transparent, #a537fd);
-  animation: animate3 1s linear infinite;
-  animation-delay: 0.5s;
-}
-#v3 span:nth-child(4){
-  top: 100%;
-  left: -12px;
-  width: 2px;
-  height: 100%;
-  background: linear-gradient(0deg, transparent, #a537fd);
-  animation: animate4 1s linear infinite;
-  animation-delay: 0.75s;
-}
-#v4:hover{
-  box-shadow: 0 0 5px #d24d57,
-              0 0 25px #d24d57,
-              0 0 50px #d24d57,
-              0 0 200px #d24d57;
-  background: #d24d57;
-  color: #f2f1ef;
-}
-#v4{
-  color: #d24d57;
-  overflow: hidden;
-}
-#v4 view{
-  color: inherit;
-}
-#v4 span{
-  position: absolute;
-  display: block;
-}
-#v4 span:nth-child(1){
-  top: -12px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #d24d57);
-  animation: animate1 1s linear infinite;
-}
-#v4 span:nth-child(2){
-  top: -100%;
-  right: -12px;
-  width: 2px;
-  height: 100%;
-  background: linear-gradient(180deg, transparent, #d24d57);
-  animation: animate2 1s linear infinite;
-  animation-delay: 0.25s;
-}
-#v4 span:nth-child(3){
-  bottom: -12px;
-  right: -12px;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(270deg, transparent, #d24d57);
-  animation: animate3 1s linear infinite;
-  animation-delay: 0.5s;
-}
-#v4 span:nth-child(4){
-  top: 100%;
-  left: -12px;
-  width: 2px;
-  height: 100%;
-  background: linear-gradient(0deg, transparent, #d24d57);
-  animation: animate4 1s linear infinite;
-  animation-delay: 0.75s;
-}
-#v5:hover{
-  box-shadow: 0 0 5px #f7ca18,
-              0 0 25px #f7ca18,
-              0 0 50px #f7ca18,
-              0 0 200px #f7ca18;
-  background: #f7ca18;
-  color: #f2f1ef;
-}
-#v5{
-  color: #f7ca18;
-  overflow: hidden;
-}
-#v5 view{
-  color: inherit;
-}
-#v5 span{
-  position: absolute;
-  display: block;
-}
-#v5 span:nth-child(1){
-  top: -12px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #f7ca18);
-  animation: animate1 1s linear infinite;
-}
-#v5 span:nth-child(2){
-  top: -100%;
-  right: -12px;
-  width: 2px;
-  height: 100%;
-  background: linear-gradient(180deg, transparent, #f7ca18);
-  animation: animate2 1s linear infinite;
-  animation-delay: 0.25s;
-}
-#v5 span:nth-child(3){
-  bottom: -12px;
-  right: -12px;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(270deg, transparent, #f7ca18);
-  animation: animate3 1s linear infinite;
-  animation-delay: 0.5s;
-}
-#v5 span:nth-child(4){
-  top: 100%;
-  left: -12px;
-  width: 2px;
-  height: 100%;
-  background: linear-gradient(0deg, transparent, #f7ca18);
-  animation: animate4 1s linear infinite;
-  animation-delay: 0.75s;
-}
 
 .editor{
   position: absolute;
@@ -332,4 +34,33 @@ l-card view{
   letter-spacing: 8px;
   font-size: 20px;
   background: #67809f;
+}
+l-card{
+  display: block;
+  border-radius: 10px;
+}
+#v1{
+  background-color: #ffb700;
+  color:#fff;
+  border: #ffb700 5px solid;
+}
+#v2{
+  background-color: #73b748;
+  color:#fff;
+  border: #73b748 5px solid;
+}
+#v3{
+  background-color: #60baff;
+  color:#fff;
+  border: #60baff 5px solid;
+}
+#v4{
+  background-color: #7b74c3;
+  color:#fff;
+  border: #7b74c3 5px solid;
+}
+#v5{
+  background-color: #f27a52;
+  color:#fff;
+  border: #f27a52 5px solid;
 }

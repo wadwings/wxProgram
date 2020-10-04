@@ -1,38 +1,38 @@
 <!--miniprogram/pages/genre/index.wxml-->
-<navigator id="v1" hover-class="none" class="navi" bindtap="navi1">
-  <l-card type="primary" full="{{true}}" plaintext="{{true}}">
+<navigator hover-class="none" class="navi" bindtap="navi1">
+  <l-card id="v1" type="primary" full="{{true}}" plaintext="{{true}}">
     <view class="content">
       <span></span><span></span><span></span><span></span>
       创新创业类
     </view>
   </l-card>
 </navigator>
-<navigator id="v2" hover-class="none" class="navi" bindtap="navi2">
-  <l-card type="primary" full="{{true}}" plaintext="{{true}}">
+<navigator hover-class="none" class="navi" bindtap="navi2">
+  <l-card id="v2" type="primary" full="{{true}}" plaintext="{{true}}">
     <view class="content">
       <span></span><span></span><span></span><span></span>
       志愿公益类
     </view>
   </l-card>
 </navigator>
-<navigator id="v3" hover-class="none" class="navi" bindtap="navi3">
-  <l-card type="primary" full="{{true}}" plaintext="{{true}}">
+<navigator hover-class="none" class="navi" bindtap="navi3">
+  <l-card id="v3" type="primary" full="{{true}}" plaintext="{{true}}">
     <view class="content">
       <span></span><span></span><span></span><span></span>
       学术科技类
     </view>
   </l-card>
 </navigator>
-<navigator id="v4" hover-class="none" class="navi" bindtap="navi4">
-  <l-card type="primary" full="{{true}}" plaintext="{{true}}">
+<navigator hover-class="none" class="navi" bindtap="navi4">
+  <l-card id="v4" type="primary" full="{{true}}" plaintext="{{true}}">
     <view class="content">
       <span></span><span></span><span></span><span></span>
       文化艺术类
     </view>
   </l-card>
 </navigator>
-<navigator id="v5" hover-class="none" class="navi" bindtap="navi5">
-  <l-card type="primary" full="{{true}}" plaintext="{{true}}">
+<navigator hover-class="none" class="navi" bindtap="navi5">
+  <l-card id="v5" type="primary" full="{{true}}" plaintext="{{true}}">
     <view class="content">
       <span></span><span></span><span></span><span></span>
       体育休闲类
