@@ -1,9 +1,13 @@
 /* miniprogram/pages/innovation/random_component/index.wxss */
-.avatar{
-  margin: 0 30px;
-  display: inline-block;
+.block{
+  height:150px;
 }
-
+image{
+  width: 80%;
+  height: 100px;
+  margin: 0 auto;
+  display: block;
+}
 .rich-text{
   position: absolute;
   width:100%;
@@ -13,4 +17,31 @@
   display: block;
   background: white;
   left:0;
+}
+.text{
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  margin: 0 10% 30% 10%;
+}
+
+.textNoMargin{
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  margin: 0 10% 0 10%;
+}
+.margin{
+  margin: 30% 0 0 0;
+}
+text{
+  text-align: center;
 }

@@ -1,6 +1,11 @@
 <!--miniprogram/pages/innovation/random_component/index.wxml-->
-<view>
-<l-avatar class="avatar" icon-style="color:{{data.color}}" size="250" src="{{data.src}}" text="{{data.shetuan}}" id="{{data.index}}"placement="bottom" mode="aspectFill" bindtap="details"></l-avatar>
+<view wx:if="{{data.index % 2}}" class="block" id="{{data.index}}" bindtap="details">
+  <view><image src="{{data.src}}" mode="aspectFill"></image></view> 
+  <view style="background:{{data.color}}" class="text"><text>{{data.shetuan}}</text></view>
+</view>
+<view wx:else class="block" id="{{data.index}}" bindtap="details">
+  <view class="margin"><image src="{{data.src}}" mode="aspectFill"></image></view> 
+  <view style="background:{{data.color}}" class="textNoMargin"><text>{{data.shetuan}}</text></view>
 </view>
 <view bindtap="onClose" wx:if="{{html}}" class="rich-text">
   <rich-text nodes="{{html}}"></rich-text>

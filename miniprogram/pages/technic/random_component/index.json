@@ -1,6 +1,5 @@
 {
   "component": true,
   "usingComponents": {
-    "l-avatar":"../../../miniprogram_npm/lin-ui/avatar/index"
   }
 }

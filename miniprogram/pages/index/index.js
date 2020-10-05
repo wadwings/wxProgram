@@ -17,8 +17,9 @@ Page({
     signup: {
       name: "",
       classes: "",
-      uninumber: ""
-    }
+      uninumber: "",
+      phonenumber: ""
+    },
   },
   onGetOpenid: function () {
     let that = this
@@ -80,7 +81,7 @@ Page({
     setTimeout(() => {
       if(this.data.form)
         wx.lin.initValidateForm(this);
-    },3000)
+    },10000)
     let that = this;
     wx.getSetting({
       success: res => {

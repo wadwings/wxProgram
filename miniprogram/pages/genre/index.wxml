@@ -1,4 +1,14 @@
 <!--miniprogram/pages/genre/index.wxml-->
+<view class="input-block">
+<l-input bindinputchange="inputchange" class="input" clear="true" label-width="170" label="Search" placeholder="请输入社团名称">
+  <l-button id="research" bindtap="search" class="competeSearch" width="100" shape="semicircle" slot="right" size="mini" icon="research" plain="true"></l-button>
+</l-input>
+</view>
+<swiper style="width:100%" autoplay="true" indicator-dots="true">
+<swiper-item wx:for="{{pic}}" wx:for-item="pic">
+<image src="{{pic.src}}" mode="scaleToFill"></image>
+</swiper-item>
+</swiper>
 <navigator hover-class="none" class="navi" bindtap="navi1">
   <l-card id="v1" type="primary" full="{{true}}" plaintext="{{true}}">
     <view class="content">
@@ -42,3 +52,6 @@
 <navigator url="../editor/editor" wx:if="{{editor}}" class="editor">
   <view>编辑器</view>
 </navigator>
+<view bindtap="onClose" wx:if="{{html}}" class="rich-text">
+  <rich-text nodes="{{html}}"></rich-text>
+</view>

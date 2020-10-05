@@ -8,6 +8,13 @@ Page({
    */
   data: {
     editor: 0,
+    pic: [{
+      src:"https://images.pexels.com/photos/169789/pexels-photo-169789.jpeg"
+    },{
+      src:"https://images.pexels.com/photos/4101555/pexels-photo-4101555.jpeg"
+    }],
+    html: null,
+    value: null,
   },
   navi1(){
     setTimeout(() => {
@@ -43,6 +50,33 @@ Page({
         url: '../PE/index',
       })
     }, 500)
+  },
+  inputchange(e){
+    this.setData({
+      search:e.detail.value
+    })
+  },
+  search(){
+    let value = this.data.search;
+    db.collection("article").where({
+      shetuan: value,
+    }).get().then(res =>{
+      if(!res.data.length)
+        wx.showToast({
+          title: '搜索有误，请确认你输入是否正确',
+          icon: 'none'
+        })
+      else{
+        this.setData({
+          html:res.data[0].html
+        })
+      }
+    })
+  },
+  onClose: function(){
+    this.setData({
+      html: null
+    })
   },
   /**
    * 生命周期函数--监听页面加载

@@ -22,7 +22,7 @@ l-card view{
 }
 
 .editor{
-  position: absolute;
+  position: fixed;
   bottom: 0;
   z-index:2;
   display:flex;
@@ -63,4 +63,28 @@ l-card{
   background-color: #f27a52;
   color:#fff;
   border: #f27a52 5px solid;
+}
+
+.input-block{
+  display:flex;
+  justify-content: center;
+}
+
+.input{
+  display: block;
+  width: 80%;
+}
+
+.rich-text{
+  position: absolute;
+  width:100%;
+  height:100%;
+  z-index:100;
+  top:0;
+  display: block;
+  background: white;
+  left:0;
+}
+image{
+  width: 100%;
 }
